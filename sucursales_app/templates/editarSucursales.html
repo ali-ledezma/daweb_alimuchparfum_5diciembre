@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <!-- La tarjeta card-->
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editarSucursal' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" id="txtid" name="txtid" class="form-control" value="{{ missucursales.id }}" readonly required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" value="{{ missucursales.direccion }}" maxlength="30" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txttelefono" name="txttelefono" class="form-control" value="{{ missucursales.telefono }}" maxlength="10" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" value="{{ missucursales.correo }}" maxlength="20" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numnumero" name="numnumero" class="form-control" value="{{ missucursales.numero }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ missucursales.nombre }}" maxlength="15" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numcempleados" name="numcempleados" class="form-control" value="{{ missucursales.cempleados }}" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

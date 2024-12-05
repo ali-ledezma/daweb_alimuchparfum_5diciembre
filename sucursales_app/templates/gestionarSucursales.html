@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Agregar Sucursal</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrarSucursal' %}" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <input type="number" id="txtid" name="txtid" class="form-control" placeholder="ID de la Sucursal" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Dirección" maxlength="30" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="Teléfono" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo" maxlength="20" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="number" id="numnumero" name="numnumero" class="form-control" placeholder="Número de sucursal" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="15" required>
+                    </div>
+
+
+                    <div class="form-group py-3">
+                        <input type="number" id="numcempleados" name="numcempleados" class="form-control" placeholder="Cantidad de empleados" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-8">
+        <h1>Listado de Sucursales</h1>
+        <img src="{% static 'img/sucursales.jpg' %}" style="width: 300px;" alt="Ejemplo de imagen">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">C. Empleados</th>
+                        <th scope="col">-</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in missucursales %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ m.id }}</td>
+                        <td>{{ m.direccion }}</td>
+                        <td>{{ m.telefono }}</td>
+                        <td>{{ m.correo }}</td>
+                        <td>{{ m.numero }}</td>
+                        <td>{{ m.nombre }}</td>
+                        <td>{{ m.cempleados }}</td>
+
+                        <td><a href="seleccionarSucursal/{{ m.id }}" class="btn btn-success">Editar</a></td>
+                        <td><a href="borrarSucursal/{{ m.id }}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
