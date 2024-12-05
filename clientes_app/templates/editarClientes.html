@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editarCliente' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" class="form-control" value="{{ misclientes.idcliente }}" readonly required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misclientes.nombre }}" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="text" id="txtrfc" name="txtrfc" class="form-control" value="{{ misclientes.rfc }}" maxlength="15" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="number" id="numcuenta" name="numcuenta" class="form-control" value="{{ misclientes.cuenta }}" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="email" id="txtcorreo" name="txtcorreo" class="form-control" value="{{ misclientes.correo }}" maxlength="15" required>
+                    </div>
+
+                    <div class="form-group py-3">
+                        <input type="date" id="datefec" name="datefec" class="form-control" value="{{ misclientes.fecha_nac|date:'Y-m-d' }}" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

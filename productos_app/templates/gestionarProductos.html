@@ -1,0 +1,95 @@
+{%extends "base.html"%}
+{% load static %}
+{% block cuerpo%}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Agregar Producto</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarProducto/" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <input type="text" id="txtid" name="txtid" class="form-control" placeholder="ID del Producto" required>
+                    </div>
+                    
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="20" required>
+                    </div>
+                    
+                    <div class="form-group py-3">
+                        <input type="text" id="txtmarca" name="txtmarca" class="form-control" placeholder="Marca" maxlength="20" required>
+                    </div>
+                    
+                    <div class="form-group py-3">
+                        <input type="number" id="numstock" name="numstock" class="form-control" placeholder="Stock" required>
+                    </div>
+                    
+                    <div class="form-group py-3">
+                        <input type="text" id="txtpro" name="txtpro" class="form-control" placeholder="Proveedor" maxlength="20" required>
+                    </div>
+                    
+                    <div class="form-group py-3">
+                        <input type="number" id="numidsucursal" name="numidsucursal" class="form-control" placeholder="IDSucursal" required>
+                    </div>
+                    
+                    <div class="form-group py-3">
+                        <textarea id="txtnotas" name="txtnotas" class="form-control" placeholder="Notas" required></textarea>
+                    </div>
+                    
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+        <div class="col-sm-12 col-md-4 col-xl-8">
+            <h1>Listado de Productos</h1>
+            <img src="{% static 'img/perfumes.jpg' %}" style="width: 300px;" alt="Ejemplo de imagen">
+        
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Marca</th>
+                            <th scope="col">Stock</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Sucursal</th>
+                            <th scope="col">Notas</th>
+                            <th scope="col">-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in misproductos %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ p.idproducto }}</td>
+                            <td>{{ p.nombre }}</td>
+                            <td>{{ p.marca }}</td>
+                            <td>{{ p.stock }}</td>
+                            <td>{{ p.idproveedor }}</td>
+                            <td>{{ p.idsucursal }}</td>
+                            <td>{{ p.notas }}</td>
+        
+                            <td><a href="seleccionarProducto/{{ p.idproducto }}" class="btn btn-success">Editar</a></td>
+                            <td><a href="borrarProducto/{{ p.idproducto }}" class="btn btn-danger">Borrar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+
+    
+{%endblock%}

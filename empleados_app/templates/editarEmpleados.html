@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <!-- La tarjeta card-->
+    <div class="card">
+      <div class="card-body">
+        <form action="{% url 'editarEmpleado' %}" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="txtid" name="txtid" class="form-control" value="{{ misempleados.idempleados }}" readonly required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ misempleados.nombre }}" maxlength="50" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" id="numtelefono" name="numtelefono" class="form-control" value="{{ misempleados.telefono }}" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="date" id="datafec" name="datafec" class="form-control" value="{{ misempleados.fecha_ingreso|date:"Y-m-d" }}" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" step="0.01" id="numsalario" name="numsalario" class="form-control" value="{{ misempleados.salario }}" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtcurp" name="txtcurp" class="form-control" value="{{ misempleados.curp }}" maxlength="15" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="number" id="txtids" name="txtids" class="form-control" value="{{ misempleados.idsucursal }}" required>
+          </div>
+          <div class="form-group py-3">
+            <input type="text" id="txtpuesto" name="txtpuesto" class="form-control" value="{{ misempleados.puesto }}" required>
+          </div>
+          <div class="form-group py-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
